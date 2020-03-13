@@ -18,6 +18,7 @@
     "Contoso.HAServer": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "?clientId=3",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

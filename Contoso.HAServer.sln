@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Services", "4.Services", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Tests", "5.Tests", "{1CDB5285-F7EB-44F2-B5AD-43EA7181AFBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HATestClient", "Contoso.HATestClient\Contoso.HATestClient.csproj", "{28B23528-E8B9-42D9-BB75-10329B771A95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{25BF30ED-5773-4962-B88A-25568AEB164B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25BF30ED-5773-4962-B88A-25568AEB164B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25BF30ED-5773-4962-B88A-25568AEB164B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B23528-E8B9-42D9-BB75-10329B771A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B23528-E8B9-42D9-BB75-10329B771A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B23528-E8B9-42D9-BB75-10329B771A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B23528-E8B9-42D9-BB75-10329B771A95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{54DDB936-E95A-4214-835E-4B0748C999F9} = {0E332F78-AF93-4067-902A-96CFE8E9B05C}
 		{8B8585A1-0C68-4B87-831C-BE02252C30C0} = {A6B2538A-6B12-4B18-9B3B-09DB136B2A02}
 		{25BF30ED-5773-4962-B88A-25568AEB164B} = {30CCE379-05C0-4208-9E9D-08E2E10F30C1}
+		{28B23528-E8B9-42D9-BB75-10329B771A95} = {1CDB5285-F7EB-44F2-B5AD-43EA7181AFBE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {489B77AC-08E2-4DA3-9DD4-C8E751747F82}

@@ -10,6 +10,7 @@ namespace Contoso.HAServer.RateLimitService
 {
     class RateLimitService : IRateLimitService
     {
+        private static readonly object _processLocker = new object();
         private readonly ILogger<RateLimitService> _logger;
         private readonly IRateLimitCore _rateLimitCore;
         private readonly IOptions<RateLimitOptions> _options;
@@ -20,10 +21,16 @@ namespace Contoso.HAServer.RateLimitService
             _rateLimitCore = rateLimitCore;
             _options = options;
         }
-        public bool IsRateLimitReach(string clientId,DateTime requestTime)
-        {   
-            var rateLimitCounter = _rateLimitCore.HandleClient(clientId,requestTime);
-            if (rateLimitCounter.TotalRequests > _options.Value.MaxConnectionPerUser)
+        object obj;
+        public bool IsRateLimitReach(string clientId, DateTime requestTime)
+        {
+            var rateLimitCounter = _rateLimitCore.HandleClient(clientId, requestTime);
+            long totalRequests;
+            lock (_processLocker)
+            {
+                totalRequests = rateLimitCounter.TotalRequests;
+            }
+            if (totalRequests > _options.Value.MaxConnectionPerUser)
             {
                 _logger.LogWarning($"clientId: {clientId} has reach the limit");
                 return true;
