@@ -27,9 +27,8 @@ namespace Contoso.HAServer
                     .AddSingleton<IMemoryCache,MemoryCache>()
                     .RegisterCores()
                     .RegisterServices()
-                    .RegisterMemoryCacheRateLimitCounter();
-
-            services.Configure<RateLimitOptions>(Configuration.GetSection("RateLimitOptions"));
+                    .RegisterMemoryCacheRateLimitCounter()
+                    .Configure<RateLimitOptions>(Configuration.GetSection("RateLimitOptions"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

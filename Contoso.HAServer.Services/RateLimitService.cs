@@ -24,12 +24,18 @@ namespace Contoso.HAServer.RateLimitService
 
         public bool IsRateLimitReach(string clientId)
         {
-            if (_rateLimitCore.HandleClient(clientId) > _options.Value.MaxConnectionPerUser)
+            try
             {
-                _logger.LogWarning($"clientId: {clientId} has reach the limit");
-                return true;
+                if (_rateLimitCore.HandleClient(clientId) > _options.Value.MaxConnectionPerUser)
+                {
+                    _logger.LogWarning($"clientId: {clientId} has reach the limit");
+                    return true;
+                }
             }
-
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+            }
             return false;
         }
     }

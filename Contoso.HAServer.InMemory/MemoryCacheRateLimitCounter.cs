@@ -27,6 +27,7 @@ namespace Contoso.HAServer.InMemory
         {
             try
             {
+                //common issue with getOrCreate of IMemoryCache force us to use lock
                 lock (_locker)
                 {
                     return _memoryCache.GetOrCreate(clientId, entry =>

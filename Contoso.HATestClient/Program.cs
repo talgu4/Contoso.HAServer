@@ -14,7 +14,7 @@ namespace Contoso.HATestClient
             var input = Console.ReadLine();
             if (input.Equals("1"))
             {
-                DDoSAttack2();
+                DDoSAttack();
             }
             else
             {
@@ -33,15 +33,6 @@ namespace Contoso.HATestClient
         }
 
         private static void DDoSAttack()
-        {
-            Parallel.For(0, 100, async (i) =>
-            {
-                var stringTask =  client.GetAsync(@"http://localhost:8080/?clientId=3").GetAwaiter().GetResult();
-                Console.WriteLine(stringTask.StatusCode);
-            });
-        }
-
-        private static void DDoSAttack2()
         {
             Task[] tasks = new Task[100];
             for (int i = 0; i < 100; i++)
