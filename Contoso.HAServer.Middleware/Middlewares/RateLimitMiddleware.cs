@@ -21,14 +21,22 @@ namespace Contoso.HAServer.Middleware.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             var clientId = context.Request.Query["clientId"];
-            var requestTime = DateTime.Now;
-            if (_RateLimitService.IsRateLimitReach(clientId, requestTime))
+            if (string.IsNullOrWhiteSpace(clientId))
             {
-                context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
             else
             {
-                await _next(context);
+                var requestTime = DateTime.Now;
+                if (_RateLimitService.IsRateLimitReach(clientId, requestTime))
+                {
+                    context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                }
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await _next(context);
+                }
             }
         }
     }

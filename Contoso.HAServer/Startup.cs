@@ -25,7 +25,6 @@ namespace Contoso.HAServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions()
-                //AddSingleton<IRateLimitOptions, RateLimitOptions>()
                     .AddSingleton<IMemoryCache,MemoryCache>()
                     .RegisterCores()
                     .RegisterServices()
@@ -37,21 +36,17 @@ namespace Contoso.HAServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             //register middlewares
             app.UseMiddlewares();
-
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapGet("/",async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.WriteAsync("OK");
                 });
             });
         }
