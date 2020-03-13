@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Contoso.HAServer.Core
 {
@@ -18,27 +19,16 @@ namespace Contoso.HAServer.Core
             _logger = logger;
             _memoryCache = memoryCache;
         }
-        public RateLimitCounter HandleClient(string clientId, DateTime requestTime)
+        public long HandleClient(string clientId)
         {
             try
             {
-                RateLimitCounter rateLimitCounter;
-                if (_memoryCache.Exists(clientId))
-                {
-                    rateLimitCounter = _memoryCache.Get(clientId);
-                    rateLimitCounter.TotalRequests++;
-                }
-                else
-                {
-                    rateLimitCounter = new RateLimitCounter(requestTime, 1);
-                    _memoryCache.Set(clientId, rateLimitCounter);
-                }
-                return rateLimitCounter;
+                return _memoryCache.GetOrCreate(clientId).Increment();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.ToString());
-                return null;
+                throw;
             }
         }
     }

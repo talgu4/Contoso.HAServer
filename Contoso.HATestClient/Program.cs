@@ -14,35 +14,46 @@ namespace Contoso.HATestClient
             var input = Console.ReadLine();
             if (input.Equals("1"))
             {
-                DDoSAttack();
+                DDoSAttack2();
             }
             else
             {
                 NormallClients();
             }
+            Console.ReadLine();
         }
 
         private static void NormallClients()
         {
-            Parallel.For(0, 100, (i) =>
+            Parallel.For(0, 100, async (i) =>
             {
-                var stringTask = client.GetAsync($"http://localhost:8080/?clientId= {i}").GetAwaiter().GetResult();
+                var stringTask = await client.GetAsync($"http://localhost:8080/?clientId= {i}");
                 Console.WriteLine($"clientId= {i} StatusCode: {stringTask.StatusCode}");
             });
         }
 
         private static void DDoSAttack()
         {
+            Parallel.For(0, 100, async (i) =>
+            {
+                var stringTask =  client.GetAsync(@"http://localhost:8080/?clientId=3").GetAwaiter().GetResult();
+                Console.WriteLine(stringTask.StatusCode);
+            });
+        }
+
+        private static void DDoSAttack2()
+        {
+            Task[] tasks = new Task[100];
             for (int i = 0; i < 100; i++)
             {
-                var stringTask = client.GetAsync(@"http://localhost:8080/?clientId=3").GetAwaiter().GetResult();
-                Console.WriteLine(stringTask.StatusCode);
+                tasks[i] = Task.Factory.StartNew(async() =>
+                {
+                    var now = DateTime.Now;
+                    var stringTask = await client.GetAsync(@"http://localhost:8080/?clientId=3");
+                    Console.WriteLine($"{now} {stringTask.StatusCode} + {System.Threading.Thread.CurrentThread.ManagedThreadId} ");
+                });
             }
-            //Parallel.For(0, 100, (i) =>
-            //{
-            //    var stringTask = client.GetAsync(@"http://localhost:8080/?clientId=3").GetAwaiter().GetResult();
-            //    Console.WriteLine(stringTask.StatusCode);
-            //});
+            Task.WaitAll(tasks);
         }
     }
 }

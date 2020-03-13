@@ -27,8 +27,7 @@ namespace Contoso.HAServer.Middleware.Middlewares
             }
             else
             {
-                var requestTime = DateTime.Now;
-                if (_RateLimitService.IsRateLimitReach(clientId, requestTime))
+                if (_RateLimitService.IsRateLimitReach(clientId))
                 {
                     context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
                 }

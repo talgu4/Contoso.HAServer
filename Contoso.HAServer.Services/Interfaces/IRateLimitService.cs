@@ -6,6 +6,6 @@ namespace Contoso.HAServer.RateLimit.Interfaces
 {
     public interface IRateLimitService
     {
-        bool IsRateLimitReach(string clientId,DateTime requestTime);
+        bool IsRateLimitReach(string clientId);
     }
 }

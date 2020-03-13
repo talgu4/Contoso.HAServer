@@ -21,20 +21,15 @@ namespace Contoso.HAServer.RateLimitService
             _rateLimitCore = rateLimitCore;
             _options = options;
         }
-        object obj;
-        public bool IsRateLimitReach(string clientId, DateTime requestTime)
+
+        public bool IsRateLimitReach(string clientId)
         {
-            var rateLimitCounter = _rateLimitCore.HandleClient(clientId, requestTime);
-            long totalRequests;
-            lock (_processLocker)
-            {
-                totalRequests = rateLimitCounter.TotalRequests;
-            }
-            if (totalRequests > _options.Value.MaxConnectionPerUser)
+            if (_rateLimitCore.HandleClient(clientId) > _options.Value.MaxConnectionPerUser)
             {
                 _logger.LogWarning($"clientId: {clientId} has reach the limit");
                 return true;
             }
+
             return false;
         }
     }

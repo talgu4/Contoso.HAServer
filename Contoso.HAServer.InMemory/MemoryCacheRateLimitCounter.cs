@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Threading.Tasks;
 
 namespace Contoso.HAServer.InMemory
 {
@@ -12,8 +13,9 @@ namespace Contoso.HAServer.InMemory
         private readonly ILogger<MemoryCacheRateLimitCounter> _logger;
         private readonly IOptions<RateLimitOptions> _options;
         private readonly IMemoryCache _memoryCache;
+        private readonly object _locker = new object();
 
-        public MemoryCacheRateLimitCounter(ILogger<MemoryCacheRateLimitCounter> logger ,IMemoryCache memoryCache,
+        public MemoryCacheRateLimitCounter(ILogger<MemoryCacheRateLimitCounter> logger, IMemoryCache memoryCache,
             IOptions<RateLimitOptions> options)
         {
             _logger = logger;
@@ -21,30 +23,25 @@ namespace Contoso.HAServer.InMemory
             _memoryCache = memoryCache;
         }
 
-        public bool Exists(string clientId)
-        {
-            return _memoryCache.TryGetValue(clientId, out _);
-        }
-
-        public RateLimitCounter Get(string clientId)
-        {
-            if (_memoryCache.TryGetValue(clientId, out object value))
-            {
-                return value as RateLimitCounter;
-            }
-            return null;
-        }
-
-        public void Set(string clientId, RateLimitCounter counter)
+        public RateLimitCounter GetOrCreate(string clientId)
         {
             try
             {
-                _memoryCache.Set(clientId, counter,
-                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(_options.Value.ExpirationTime));
+                lock (_locker)
+                {
+                    return _memoryCache.GetOrCreate(clientId, entry =>
+                    {
+                        var rateLimitCounter = new RateLimitCounter();
+                        entry.SetValue(rateLimitCounter);
+                        entry.SetAbsoluteExpiration(_options.Value.ExpirationTime);
+                        return rateLimitCounter;
+                    });
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Exception when Set ClientId: {clientId}. Exception: {ex.ToString()}");
+                return null;
             }
         }
     }

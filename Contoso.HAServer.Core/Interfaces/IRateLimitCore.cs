@@ -7,6 +7,6 @@ namespace Contoso.HAServer.Core.Interfaces
 {
     public interface IRateLimitCore
     {
-        RateLimitCounter HandleClient(string clientId, DateTime requestTime);
+        long HandleClient(string clientId);
     }
 }
