@@ -6,7 +6,7 @@ namespace Contoso.HAServer.Middleware
 {
     public static class ApplicationBuilderExtension
     {
-        public static IApplicationBuilder RegisterMiddlewares(this IApplicationBuilder services)
+        public static IApplicationBuilder UseMiddlewares(this IApplicationBuilder services)
         {
             return services.UseMiddleware<RateLimitMiddleware>();
         }

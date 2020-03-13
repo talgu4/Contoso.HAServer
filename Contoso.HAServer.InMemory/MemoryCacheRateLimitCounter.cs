@@ -2,6 +2,7 @@
 using Contoso.HAServer.Common.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace Contoso.HAServer.InMemory
@@ -9,10 +10,11 @@ namespace Contoso.HAServer.InMemory
     public class MemoryCacheRateLimitCounter : IMemoryCacheRateLimitCounter
     {
         private readonly ILogger<MemoryCacheRateLimitCounter> _logger;
-        private readonly IRateLimitOptions _options;
+        private readonly IOptions<RateLimitOptions> _options;
         private readonly IMemoryCache _memoryCache;
 
-        public MemoryCacheRateLimitCounter(ILogger<MemoryCacheRateLimitCounter> logger ,IMemoryCache memoryCache,IRateLimitOptions options)
+        public MemoryCacheRateLimitCounter(ILogger<MemoryCacheRateLimitCounter> logger ,IMemoryCache memoryCache,
+            IOptions<RateLimitOptions> options)
         {
             _logger = logger;
             _options = options;
@@ -38,7 +40,7 @@ namespace Contoso.HAServer.InMemory
             try
             {
                 _memoryCache.Set(clientId, counter,
-                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(_options.ExpirationTime));
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(_options.Value.ExpirationTime));
             }
             catch (Exception ex)
             {

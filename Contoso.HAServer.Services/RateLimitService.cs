@@ -1,7 +1,9 @@
-﻿using Contoso.HAServer.Common.Interfaces;
+﻿using Contoso.HAServer.Common;
+using Contoso.HAServer.Common.Interfaces;
 using Contoso.HAServer.Core.Interfaces;
 using Contoso.HAServer.RateLimit.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace Contoso.HAServer.RateLimitService
@@ -10,9 +12,9 @@ namespace Contoso.HAServer.RateLimitService
     {
         private readonly ILogger<RateLimitService> _logger;
         private readonly IRateLimitCore _rateLimitCore;
-        private readonly IRateLimitOptions _options;
+        private readonly IOptions<RateLimitOptions> _options;
 
-        public RateLimitService(ILogger<RateLimitService> logger, IRateLimitOptions options, IRateLimitCore rateLimitCore)
+        public RateLimitService(ILogger<RateLimitService> logger, IOptions<RateLimitOptions> options, IRateLimitCore rateLimitCore)
         {
             _logger = logger;
             _rateLimitCore = rateLimitCore;
@@ -23,13 +25,7 @@ namespace Contoso.HAServer.RateLimitService
             _logger.LogInformation("Rate limit service - is rate limit reach");
             
             var rateLimitCounter = _rateLimitCore.HandleClient(clientId,requestTime);
-            if (rateLimitCounter.TotalRequests > _options.MaxConnectionPerUser)
-            {
-                return false;
-            }
-
-
-            throw new NotImplementedException();
+            return rateLimitCounter.TotalRequests > _options.Value.MaxConnectionPerUser;
         }
     }
 }

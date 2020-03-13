@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contoso.HAServer.Common;
 using Contoso.HAServer.Common.Interfaces;
+using Contoso.HAServer.Core;
 using Contoso.HAServer.InMemory;
 using Contoso.HAServer.Middleware;
+using Contoso.HAServer.RateLimitService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +24,14 @@ namespace Contoso.HAServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IRateLimitOptions, RateLimitOptions>()
+            services.AddOptions()
+                //AddSingleton<IRateLimitOptions, RateLimitOptions>()
+                    .AddSingleton<IMemoryCache,MemoryCache>()
+                    .RegisterCores()
+                    .RegisterServices()
                     .RegisterMemoryCacheRateLimitCounter();
+
+            services.Configure<RateLimitOptions>(Configuration.GetSection("RateLimitOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +43,7 @@ namespace Contoso.HAServer
             }
 
             //register middlewares
-            app.RegisterMiddlewares();
+            app.UseMiddlewares();
 
             app.UseRouting();
 

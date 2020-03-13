@@ -10,7 +10,7 @@ namespace Contoso.HAServer.RateLimitService
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            return services.AddScoped<IRateLimitService, RateLimitService>();
+            return services.AddSingleton<IRateLimitService, RateLimitService>();
         }
     }
 }
