@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.HAServer.Common\Contoso.HAServer.Common.csproj" />
+    <ProjectReference Include="..\Contoso.HAServer.InMemory\Contoso.HAServer.InMemory.csproj" />
+    <ProjectReference Include="..\Contoso.HAServer.Middleware\Contoso.HAServer.Middleware.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer", "Contoso.HAServer\Contoso.HAServer.csproj", "{96B2B465-065C-4FB6-A27A-A3FE0AB63B58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer.Middleware", "Contoso.HAServer.Middleware\Contoso.HAServer.Middleware.csproj", "{6ECBA716-C8DA-43CF-BD28-116B921FF693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer.RateLimitService", "Contoso.HAServer.Services\Contoso.HAServer.RateLimitService.csproj", "{FBA7DEED-3F53-4A7A-AE32-285E589705EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer.Core", "Contoso.HAServer.Core\Contoso.HAServer.Core.csproj", "{54DDB936-E95A-4214-835E-4B0748C999F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastracture", "1.Infrastracture", "{A6B2538A-6B12-4B18-9B3B-09DB136B2A02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer.InMemory", "Contoso.HAServer.InMemory\Contoso.HAServer.InMemory.csproj", "{8B8585A1-0C68-4B87-831C-BE02252C30C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Common", "2.Common", "{30CCE379-05C0-4208-9E9D-08E2E10F30C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.HAServer.Common", "Contoso.HAServer.Common\Contoso.HAServer.Common.csproj", "{25BF30ED-5773-4962-B88A-25568AEB164B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Application", "3.Application", "{0E332F78-AF93-4067-902A-96CFE8E9B05C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Services", "4.Services", "{F51E6B55-A2D1-41AE-85C5-67107DA1A27D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96B2B465-065C-4FB6-A27A-A3FE0AB63B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B2B465-065C-4FB6-A27A-A3FE0AB63B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B2B465-065C-4FB6-A27A-A3FE0AB63B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B2B465-065C-4FB6-A27A-A3FE0AB63B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ECBA716-C8DA-43CF-BD28-116B921FF693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ECBA716-C8DA-43CF-BD28-116B921FF693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ECBA716-C8DA-43CF-BD28-116B921FF693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ECBA716-C8DA-43CF-BD28-116B921FF693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA7DEED-3F53-4A7A-AE32-285E589705EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA7DEED-3F53-4A7A-AE32-285E589705EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA7DEED-3F53-4A7A-AE32-285E589705EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA7DEED-3F53-4A7A-AE32-285E589705EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54DDB936-E95A-4214-835E-4B0748C999F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DDB936-E95A-4214-835E-4B0748C999F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54DDB936-E95A-4214-835E-4B0748C999F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54DDB936-E95A-4214-835E-4B0748C999F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B8585A1-0C68-4B87-831C-BE02252C30C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B8585A1-0C68-4B87-831C-BE02252C30C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B8585A1-0C68-4B87-831C-BE02252C30C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B8585A1-0C68-4B87-831C-BE02252C30C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BF30ED-5773-4962-B88A-25568AEB164B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BF30ED-5773-4962-B88A-25568AEB164B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BF30ED-5773-4962-B88A-25568AEB164B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BF30ED-5773-4962-B88A-25568AEB164B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96B2B465-065C-4FB6-A27A-A3FE0AB63B58} = {0E332F78-AF93-4067-902A-96CFE8E9B05C}
+		{6ECBA716-C8DA-43CF-BD28-116B921FF693} = {F51E6B55-A2D1-41AE-85C5-67107DA1A27D}
+		{FBA7DEED-3F53-4A7A-AE32-285E589705EF} = {F51E6B55-A2D1-41AE-85C5-67107DA1A27D}
+		{54DDB936-E95A-4214-835E-4B0748C999F9} = {0E332F78-AF93-4067-902A-96CFE8E9B05C}
+		{8B8585A1-0C68-4B87-831C-BE02252C30C0} = {A6B2538A-6B12-4B18-9B3B-09DB136B2A02}
+		{25BF30ED-5773-4962-B88A-25568AEB164B} = {30CCE379-05C0-4208-9E9D-08E2E10F30C1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {489B77AC-08E2-4DA3-9DD4-C8E751747F82}
+	EndGlobalSection
+EndGlobal
