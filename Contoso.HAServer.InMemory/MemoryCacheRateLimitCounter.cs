@@ -4,7 +4,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Threading.Tasks;
 
 namespace Contoso.HAServer.InMemory
 {
@@ -41,7 +40,7 @@ namespace Contoso.HAServer.InMemory
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception when Set ClientId: {clientId}. Exception: {ex.ToString()}");
+                _logger.LogError($"Exception when Set ClientId: {clientId}. Exception: {ex}");
                 return null;
             }
         }

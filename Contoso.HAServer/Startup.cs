@@ -24,7 +24,7 @@ namespace Contoso.HAServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions()
-                    .AddSingleton<IMemoryCache,MemoryCache>()
+                    .AddSingleton<IMemoryCache, MemoryCache>()
                     .RegisterCores()
                     .RegisterServices()
                     .RegisterMemoryCacheRateLimitCounter()
@@ -33,18 +33,18 @@ namespace Contoso.HAServer
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //register middlewares
+            //register middle wares
             app.UseMiddlewares();
-            
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/",async context =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status200OK;
-                    await context.Response.WriteAsync("OK");
-                });
+                endpoints.MapGet("/", async context =>
+                 {
+                     context.Response.StatusCode = StatusCodes.Status200OK;
+                     await context.Response.WriteAsync("OK");
+                 });
             });
         }
     }

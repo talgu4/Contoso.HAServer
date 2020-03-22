@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Contoso.HAServer.RateLimit.Interfaces
+﻿namespace Contoso.HAServer.RateLimitService.Interfaces
 {
     public interface IRateLimitService
     {

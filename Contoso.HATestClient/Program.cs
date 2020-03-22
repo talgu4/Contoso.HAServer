@@ -12,18 +12,18 @@ namespace Contoso.HATestClient
         {
             Console.WriteLine("Press 1 for DDosAttack, Press 2 for normal users");
             var input = Console.ReadLine();
-            if (input.Equals("1"))
+            if (input?.Equals("1") == true)
             {
                 DDoSAttack();
             }
             else
             {
-                NormallClients();
+                NormalClients();
             }
             Console.ReadLine();
         }
 
-        private static void NormallClients()
+        private static void NormalClients()
         {
             Parallel.For(0, 100, async (i) =>
             {
@@ -37,7 +37,7 @@ namespace Contoso.HATestClient
             Task[] tasks = new Task[100];
             for (int i = 0; i < 100; i++)
             {
-                tasks[i] = Task.Factory.StartNew(async() =>
+                tasks[i] = Task.Factory.StartNew(async () =>
                 {
                     var now = DateTime.Now;
                     var stringTask = await client.GetAsync(@"http://localhost:8080/?clientId=3");

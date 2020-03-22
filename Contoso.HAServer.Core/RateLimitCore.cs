@@ -1,11 +1,7 @@
-﻿using Contoso.HAServer.Common;
-using Contoso.HAServer.Common.Interfaces;
+﻿using Contoso.HAServer.Common.Interfaces;
 using Contoso.HAServer.Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace Contoso.HAServer.Core
 {

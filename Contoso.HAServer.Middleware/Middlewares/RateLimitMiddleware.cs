@@ -1,23 +1,22 @@
-﻿using Contoso.HAServer.RateLimit.Interfaces;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using Contoso.HAServer.RateLimitService.Interfaces;
 
 namespace Contoso.HAServer.Middleware.Middlewares
 {
     internal class RateLimitMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IRateLimitService _RateLimitService;
+        private IRateLimitService _rateLimitService;
 
-        public RateLimitMiddleware(RequestDelegate next, IRateLimitService service)
+        public RateLimitMiddleware(RequestDelegate next)
         {
             _next = next;
-            _RateLimitService = service;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, IRateLimitService service)
         {
+            _rateLimitService = service;
             var clientId = context.Request.Query["clientId"];
             if (string.IsNullOrWhiteSpace(clientId))
             {
@@ -25,7 +24,7 @@ namespace Contoso.HAServer.Middleware.Middlewares
             }
             else
             {
-                if (_RateLimitService.IsRateLimitReach(clientId))
+                if (_rateLimitService.IsRateLimitReach(clientId))
                 {
                     context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
                 }

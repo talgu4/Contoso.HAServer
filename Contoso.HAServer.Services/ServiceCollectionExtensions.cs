@@ -1,8 +1,5 @@
-﻿using Contoso.HAServer.RateLimit.Interfaces;
+﻿using Contoso.HAServer.RateLimitService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Contoso.HAServer.RateLimitService
 {
@@ -10,7 +7,7 @@ namespace Contoso.HAServer.RateLimitService
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            return services.AddSingleton<IRateLimitService, RateLimitService>();
+            return services.AddScoped<IRateLimitService, RateLimitService>();
         }
     }
 }

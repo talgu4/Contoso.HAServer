@@ -1,16 +1,15 @@
 ﻿using Contoso.HAServer.Common;
-using Contoso.HAServer.Common.Interfaces;
 using Contoso.HAServer.Core.Interfaces;
-using Contoso.HAServer.RateLimit.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using Contoso.HAServer.RateLimitService.Interfaces;
 
 namespace Contoso.HAServer.RateLimitService
 {
     class RateLimitService : IRateLimitService
     {
-        private static readonly object _processLocker = new object();
+        private static readonly object ProcessLocker = new object();
         private readonly ILogger<RateLimitService> _logger;
         private readonly IRateLimitCore _rateLimitCore;
         private readonly IOptions<RateLimitOptions> _options;

@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using System;
-using Contoso.HAServer.Middleware.Middlewares;
+﻿using Contoso.HAServer.Middleware.Middlewares;
+using Microsoft.AspNetCore.Builder;
 
 namespace Contoso.HAServer.Middleware
 {
