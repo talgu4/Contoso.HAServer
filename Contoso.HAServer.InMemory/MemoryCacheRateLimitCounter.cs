@@ -10,12 +10,12 @@ namespace Contoso.HAServer.InMemory
     public class MemoryCacheRateLimitCounter : IMemoryCacheRateLimitCounter
     {
         private readonly ILogger<MemoryCacheRateLimitCounter> _logger;
-        private readonly IOptions<RateLimitOptions> _options;
+        private readonly IOptions<MyOptions> _options;
         private readonly IMemoryCache _memoryCache;
         private readonly object _locker = new object();
 
         public MemoryCacheRateLimitCounter(ILogger<MemoryCacheRateLimitCounter> logger, IMemoryCache memoryCache,
-            IOptions<RateLimitOptions> options)
+            IOptions<MyOptions> options)
         {
             _logger = logger;
             _options = options;

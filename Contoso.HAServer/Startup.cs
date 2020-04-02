@@ -1,6 +1,7 @@
 using Contoso.HAServer.Common;
 using Contoso.HAServer.Core;
 using Contoso.HAServer.InMemory;
+using Contoso.HAServer.InMemoryRedis;
 using Contoso.HAServer.Middleware;
 using Contoso.HAServer.RateLimitService;
 using Microsoft.AspNetCore.Builder;
@@ -23,12 +24,19 @@ namespace Contoso.HAServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions()
-                    .AddSingleton<IMemoryCache, MemoryCache>()
-                    .RegisterCores()
+            services.AddOptions();
+            if (Configuration.GetSection("UseRedisCache").Get<bool>())
+            {
+                services.RegisterMemoryRedisCache(Configuration);
+            }
+            else
+            {
+                services.AddSingleton<IMemoryCache, MemoryCache>()
+                        .RegisterMemoryCacheRateLimitCounter();
+            }
+            services.RegisterCores()
                     .RegisterServices()
-                    .RegisterMemoryCacheRateLimitCounter()
-                    .Configure<RateLimitOptions>(Configuration.GetSection("RateLimitOptions"));
+                    .Configure<MyOptions>(Configuration.GetSection("MyOptions"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

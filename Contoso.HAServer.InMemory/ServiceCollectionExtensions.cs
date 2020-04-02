@@ -8,6 +8,7 @@ namespace Contoso.HAServer.InMemory
         public static IServiceCollection RegisterMemoryCacheRateLimitCounter(this IServiceCollection services)
         {
             return services.AddScoped<IMemoryCacheRateLimitCounter, MemoryCacheRateLimitCounter>();
+
         }
     }
 }

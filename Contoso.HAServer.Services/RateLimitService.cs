@@ -12,9 +12,9 @@ namespace Contoso.HAServer.RateLimitService
         private static readonly object ProcessLocker = new object();
         private readonly ILogger<RateLimitService> _logger;
         private readonly IRateLimitCore _rateLimitCore;
-        private readonly IOptions<RateLimitOptions> _options;
+        private readonly IOptions<MyOptions> _options;
 
-        public RateLimitService(ILogger<RateLimitService> logger, IOptions<RateLimitOptions> options, IRateLimitCore rateLimitCore)
+        public RateLimitService(ILogger<RateLimitService> logger, IOptions<MyOptions> options, IRateLimitCore rateLimitCore)
         {
             _logger = logger;
             _rateLimitCore = rateLimitCore;

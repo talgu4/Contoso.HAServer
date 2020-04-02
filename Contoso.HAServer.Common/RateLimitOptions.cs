@@ -2,7 +2,7 @@
 
 namespace Contoso.HAServer.Common
 {
-    public class RateLimitOptions
+    public class MyOptions
     {
         public int MaxConnectionPerUser { get; set; }
         public TimeSpan ExpirationTime { get; set; }

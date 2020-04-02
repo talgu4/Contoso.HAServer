@@ -34,8 +34,8 @@ namespace Contoso.HATestClient
 
         private static void DDoSAttack()
         {
-            Task[] tasks = new Task[100];
-            for (int i = 0; i < 100; i++)
+            Task[] tasks = new Task[5];
+            for (int i = 0; i < 5; i++)
             {
                 tasks[i] = Task.Factory.StartNew(async () =>
                 {
