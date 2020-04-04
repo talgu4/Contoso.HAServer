@@ -26,17 +26,17 @@ namespace Contoso.HAServer.InMemory
         {
             try
             {
-                //common issue with getOrCreate of IMemoryCache force us to use lock
-                lock (_locker)
+                return _memoryCache.GetOrCreate(clientId, entry =>
                 {
-                    return _memoryCache.GetOrCreate(clientId, entry =>
+                        //common issue with getOrCreate of IMemoryCache force us to use lock
+                        lock (_locker)
                     {
                         var rateLimitCounter = new RateLimitCounter();
                         entry.SetValue(rateLimitCounter);
                         entry.SetAbsoluteExpiration(_options.Value.ExpirationTime);
                         return rateLimitCounter;
-                    });
-                }
+                    }
+                });
             }
             catch (Exception ex)
             {
